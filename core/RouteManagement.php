@@ -23,10 +23,10 @@ class RouteManagement
     {
         $object = new \stdClass;
         foreach ($_GET as $key => $value) {
-            $object->get->$key = $value;
+            @$object->get->$key = $value;
         }
         foreach ($_POST as $key => $value) {
-            $object->post->$key = $value;
+            @$object->post->$key = $value;
         }
         return $object;
     }
@@ -61,7 +61,6 @@ class RouteManagement
             $this->instantiateController($controller, $param, $route[2]);
             return true;
         }
-        return $this->routeNotFound();
     }
 
     private function instantiateController($controller, array $param, $action)
@@ -76,11 +75,5 @@ class RouteManagement
             default:
                 return $controller->$action($this->getRequest());
         }
-    }
-
-    private function routeNotFound()
-    {
-        Container::routeNotFound();
-        die();
     }
 }
