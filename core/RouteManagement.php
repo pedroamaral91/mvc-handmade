@@ -40,7 +40,7 @@ class RouteManagement
     {
         $url = $this->getIncomingUrl();
         foreach ($this->routes as $route) {
-            $this->generateURL($route, $url);
+            if ($this->generateURL($route, $url) === true) break;
         }
     }
 
@@ -58,7 +58,8 @@ class RouteManagement
         }
         if ($url === $route[0]) {
             $controller = Container::newController($route[1]);
-            return $this->instantiateController($controller, $param, $route[2]);
+            $this->instantiateController($controller, $param, $route[2]);
+            return true;
         }
         return $this->routeNotFound();
     }
@@ -79,9 +80,7 @@ class RouteManagement
 
     private function routeNotFound()
     {
-        $port = $_SERVER['SERVER_PORT'];
-        // header("Location: http://localhost:$port/404");
         Container::routeNotFound();
-        // die();
+        die();
     }
 }
