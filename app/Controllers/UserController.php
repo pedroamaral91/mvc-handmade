@@ -13,7 +13,6 @@ class UserController extends BaseController
 
     public function store($request)
     {
-        $this->view->name = $request->post->name;
-        $this->renderView('/user/store', 'layout');
+        // TODO
     }
 }

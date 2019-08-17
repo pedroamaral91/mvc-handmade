@@ -8,9 +8,17 @@ abstract class BaseController
     protected $view;
     private $viewPath;
     private $layoutPath;
+    protected $scriptsJs = [];
+
     public function __construct()
     {
         $this->view = new \stdClass;
+    }
+
+    protected function importJsScripts($file)
+    {
+        $path = "<script src='/assets/js/$file.js'></script>";
+        $this->scriptsJs[] = $path;
     }
 
     public function renderView($path, $layout = null)
@@ -27,7 +35,8 @@ abstract class BaseController
     {
         $file = __DIR__ . "/../app/Views/{$this->viewPath}.php";
         if (file_exists($file)) {
-            return require_once $file;
+            require_once $file;
+            return;
         }
         return $this->errorView();
     }
@@ -36,7 +45,8 @@ abstract class BaseController
     {
         $file = __DIR__ . "/../app/Views/{$this->layoutPath}.php";
         if (file_exists($file)) {
-            return require_once $file;
+            require_once $file;
+            return;
         }
         return $this->errorView();
     }
@@ -44,5 +54,12 @@ abstract class BaseController
     public function errorView()
     {
         echo "404 NOT FOUND";
+    }
+
+    public function showScriptsJSFooter()
+    {
+        foreach ($this->scriptsJs as $script) {
+            echo $script;
+        }
     }
 }
