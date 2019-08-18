@@ -20,7 +20,7 @@
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">User</a>
+                    <a class="nav-link" href="/user/store">User</a>
                 </li>
             </ul>
         </div>

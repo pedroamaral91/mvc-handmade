@@ -6,5 +6,5 @@ use Core\BaseModel;
 
 class User extends BaseModel
 {
-    protected $table = 'cspf';
+    protected $table = 'users';
 }
